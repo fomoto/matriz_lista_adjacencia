@@ -1,4 +1,4 @@
-#Exercícios 1 ao 3
+#Exercícios 1 ao 2
 
 #Grafo nao-direcionado
 
