@@ -1,6 +1,6 @@
-#Exercícios 1 e 3
+#Exercícios 1 ao 3
 
-#Matriz de adjacencia de um Grafo Direcionado
+#Grafo nao-direcionado
 
 require 'pry'
 require 'matrix'
@@ -57,6 +57,16 @@ class Graph
     matrix.each_slice(matrix.column_size) {|r| p "#{r}"}
   end
 
+  def print_list
+    @nodes.each do |n|
+      print "v#{@nodes.index(n)}"
+      n.adjacency.each do |ad|
+        print " => v#{ad}"
+      end
+      print "\n"
+    end
+  end
+
   def get_adjacency_nodes(node)
     unless @nodes[node].nil?
       @nodes[node].adjacency.each { |n| print " v#{n}" }
@@ -76,10 +86,11 @@ op = ''
 while op != 'z'
   print "\nSelecione uma opcao\n"
   p 'a - Gerar matriz de adjacencia'
-  p 'b - Visualizar matriz'
+  p 'b - Visualizar em matriz de adjacencia'
   p 'c - Visualizar vertices adjacentes de um vertice'
   p 'd - Verificar a existencia de aresta'
   p 'e - Ver o grau de um vertice'
+  p 'f - Visualizar em lista de adjacencia'
   p 'z - Sair'
   op = gets.chomp
   case op
@@ -93,29 +104,31 @@ while op != 'z'
     when 'c'
       print "Selecione o vértice\n"
       (0..g1.nodes.count-1).each do |i|
-        print "#{i} = v#{i}\n"
+        print "#{i} - v#{i}\n"
       end
       n = gets.chomp.to_i
       g1.get_adjacency_nodes(n)
     when 'd'
       p 'Selecione o primeiro vertice'
       (0..g1.nodes.count-1).each do |i|
-        print "#{i} = v#{i}\n"
+        print "#{i} - v#{i}\n"
       end
       v1 = gets.chomp.to_i
       p 'Selecione o segundo vertice'
       (0..g1.nodes.count-1).each do |i|
-        print "#{i} = v#{i}\n"
+        print "#{i} - v#{i}\n"
       end
       v2 = gets.chomp.to_i
       p g1.verify_edge(v1,v2)
     when 'e'
       p 'Selecione o vertice'
       (0..g1.nodes.count-1).each do |i|
-        print "#{i} = v#{i}\n"
+        print "#{i} - v#{i}\n"
       end
       v = gets.chomp.to_i
       p "Grau: #{g1.nodes[v].adjacency.count}"
+    when 'f'
+      g1.print_list
     when 'z'
       break
   end
